@@ -1,8 +1,8 @@
 import express from "express";
-import expenses from './expenses-routes.js';
+import expenses from "./expenses-routes.js";
 
 const routes = (app) => {
-    app.route('/').get((req, res) => {
+    app.route("/").get((req, res) => {
         res.status(200).send("Api Financial Control");
     });
     
@@ -10,6 +10,6 @@ const routes = (app) => {
         express.json(),
         expenses
     );
-}
+};
 
 export default routes;

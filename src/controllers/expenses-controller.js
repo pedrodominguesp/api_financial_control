@@ -1,8 +1,8 @@
 import { endOfMonth, startOfMonth } from "date-fns";
 
-import expenses from "../models/Expense.js"
+import expenses from "../models/Expense.js";
 
-class Expense{
+class Expense {
     static filterPreSaveOrUpdate = (expense) => {
         return {
             date:{
@@ -10,37 +10,37 @@ class Expense{
                 $lte: endOfMonth(expense.date)
             },
             description:expense.description
-        }
+        };
     };
     
     static listAll = (req, res) => {
         expenses.find((err, expenses) => {
             res.status(200).json(expenses);
-        })
-    }
+        });
+    };
 
     static getById = (req, res) =>{
         const id = req.params.id;
         expenses.findById(id, (err, expenses) => {
             if (err) {
-                res.status(400).send({message: `${err.message} - expense id not found`})
+                res.status(400).send({message: `${err.message} - expense id not found`});
             } else {
                 res.status(200).send(expenses);
             }
         });
-    }
+    };
 
     static save = (req, res) => {
         let expense = new expenses(req.body);
 
         expense.save((err) => {
             if(err) {
-                res.status(500).send({message:`${err.message} - Error when registering expense data`})
+                res.status(500).send({message:`${err.message} - Error when registering expense data`});
             } else {
                 res.status(201).send(expense.toJSON());
             }
         });
-    }
+    };
 
     static update = async (req, res) => {
         const id = req.params.id;
@@ -61,8 +61,7 @@ class Expense{
                 }
             });
         }
-        
-    }
+    };
 
     static delete = (req, res) => {
         const id = req.params.id;
@@ -74,11 +73,11 @@ class Expense{
                 res.status(500).send({message: err.message});
             }
         });
-    }
+    };
 
     static preValidation = (expense) => {
         return expenses.find(this.filterPreSaveOrUpdate(expense));
-    }
+    };
 }
 
 export default Expense;

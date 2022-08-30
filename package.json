@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint '**/*.js'"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "mongoose": "^6.5.3"
   },
   "devDependencies": {
+    "eslint": "^8.23.0",
     "nodemon": "^2.0.19"
   }
 }
